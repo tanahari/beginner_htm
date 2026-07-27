@@ -1,3 +1,5 @@
-!/report/slab4-1-245709B.pdf
-!/report/slab4-1-245709B.tex
+/report/*.aux
+/report/*.log
+/report/*.out
+/report/*.synctex.gz
 /report/outputs
