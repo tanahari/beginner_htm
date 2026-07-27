@@ -1,0 +1,817 @@
+\documentclass[a4paper,11pt]{jlreq}
+
+% --- パッケージの読み込み ---
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,       % リンクに色を付ける（枠線の代わりに文字色を変える）
+    linkcolor=blue,        % \ref や \pageref などの内部リンクの色
+    citecolor=green,       % \cite などの文献引用リンクの色
+    urlcolor=magenta       % \url や \href などの外部URLの色
+}
+
+% --- HTML, CSS, JavaScriptをlistingsで使うための定義（修正版） ---
+\lstdefinelanguage{HTML}{
+  sensitive=false,
+  comment=[s]{<!--}{-->},
+  morecomment=[s]{<}{>},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s]{<!DOCTYPE}{>}
+}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, class, const, continue, debugger, default, delete, do, else, export, extends, finally, for, function, if, import, in, instanceof, new, return, super, switch, this, throw, try, typeof, var, void, while, with, yield, let, async, await},
+  morekeywords={true, false, null, undefined, console, window, document},
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  string=[b]{"},
+  morestring=[b]{'}
+}
+
+\lstdefinelanguage{CSS}{
+  keywords={color, background, background-color, margin, padding, border, font-size, font-family, width, height, display, position, top, bottom, left, right, flex, grid, align-items, justify-content},
+  sensitive=false,
+  comment=[s]{/*}{*/},
+  string=[b]{'}
+}
+
+% --- ソースコードのモダンな共通設定 ---
+\lstset{
+  basicstyle=\ttfamily\small,          % フォントサイズを少し小さく
+  commentstyle=\color{teal}\upshape,   % コメントは落ち着いたシアン系、直立
+  keywordstyle=\color{blue}\bfseries,  % キーワードは青の太字
+  stringstyle=\color{magenta},         % 文字列はマゼンタ系で見やすく
+  numberstyle=\tiny\color{gray},       % 行番号の色
+  numbers=left,                        % 行番号を左に表示
+  stepnumber=1,                        % 行番号の増分
+  numbersep=1.5em,                     % 行番号とコードの間隔
+  frame=none,                          % 枠線を消す
+  backgroundcolor=\color{gray!8},      % 背景色を薄いグレーに設定
+  breaklines=true,                     % 長い行の自動折り返し
+  % breakpath=true,                    % ← この行を削除またはコメントアウトする
+  captionpos=b,                        % キャプションの位置（下部）
+  keepspaces=true,                     % 空白を保持
+  showstringspaces=false,              % 文字列中の半角スペースを表示しない
+  tabsize=2                            % タブ幅
+}
+
+\begin{document}
+
+% --- 表紙 ---
+\begin{titlepage}
+    \centering
+    \vspace*{5cm} % ページ上部からの余白を確保
+    {\Huge \bfseries 知能情報基礎演習IV-2} \\[1.5cm]
+
+    {\Large 学籍番号：245709 }
+    {\Large 氏名：神田 聖} \\[0.5cm]
+
+    {\Large 実験テーマ名：Web開発の基礎 }
+    {\Large 担当教員名：宮里 智樹} \\[0.5cm]
+
+    {\Large 実験日：2026年7月27日 }
+    {\Large 提出期限日：2026年7月27日 } \\[0.5cm]
+    {\Large 実際に提出した日：\today} \\[0.5cm]
+\end{titlepage}
+
+\newpage
+
+\section{自己紹介Webページ}
+
+\begin{lstlisting}[language=HTML, caption={課題1のhtml}, label={code:task1_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>私の自己紹介ページ(課題1)</title>
+        <style>
+            /* 簡易的なCSS（見た目をちょっと整える設定） */
+            body {
+                font-family: sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f9f9f9;
+            }
+
+            header,
+            main,
+            footer {
+                background-color: #fff;
+                padding: 25px;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            }
+
+            header {
+                text-align: center;
+                background: linear-gradient(135deg, #2c3e50, #3498db);
+                color: white;
+            }
+
+            h1 {
+                margin-top: 0;
+            }
+
+            h2 {
+                border-bottom: 2px solid #3498db;
+                padding-bottom: 5px;
+                margin-top: 30px;
+            }
+
+            ul {
+                background-color: #f1f8ff;
+                padding: 20px 20px 20px 40px;
+                border-radius: 5px;
+            }
+
+            .icon-img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+                margin: 10px auto;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            footer {
+                text-align: center;
+                font-size: 0.9rem;
+                color: #777;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 1. ヘッダー領域 -->
+        <header>
+            <h1>Welcome to My Profile!</h1>
+            <p>HTMLの練習用に作った、私の自己紹介ページです。</p>
+        </header>
+
+        <!-- 2. 自己紹介メインエリア -->
+        <main>
+            <h2>プロフィール</h2>
+            <p>はじめまして！現在、Web開発の基礎を勉強中の神田聖です。</p>
+            <p>2年次の時にこの講義を受講することを忘れていたので、3年次の今受講することになりました。</p>
+
+            <h2>私の好きなこと</h2>
+            <ul>
+                <li>物理学（大学院では物理系の研究室を志望しています）</li>
+                <li>音楽を聴くこと</li>
+                <li>勉強すること</li>
+            </ul>
+
+            <h2>自分がよく使っているアイコン</h2>
+            <img src="my-icon.png" alt="自分がよく使うアイコン" width="400" class="icon-img">
+            <p>ちなみにこの画像は数式であり、ナビエストークス方程式の移流項という名前の式である。</p>
+
+            <h2>自分が物理を好きになったきっかけの人</h2>
+            <p>
+                通称：ヨビノリ（<a href="https://www.youtube.com/@yobinori" target="_blank">予備校のノリで学ぶ大学の数学・物理のチャンネル</a>）
+            </p>
+        </main>
+
+        <!-- 3. フッター領域 -->
+        <footer>
+            <p>&copy; 2026 神田聖. All Rights Reserved.</p>
+        </footer>
+    </body>
+</html>
+\end{lstlisting}
+
+コード\ref{code:task1_html} は自己紹介Webページである。コード例の方では、少し味気なかったのでcssで装飾を施した。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task1.png}
+  \caption{課題1の実験結果}
+  \label{fig:task1_output}
+\end{figure}
+
+図\ref{fig:task1_output} は課題1の実験結果である。
+
+実験結果としては、とても見やすいページとなった。cssを使うことで、よりページが鮮やかになることで読みやすくできることが改めて分かる。
+
+\section{ランダムに変わる背景色}
+
+\begin{lstlisting}[language=HTML, caption={課題2のhtml}, label={code:task2_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> 二つのファイルに分けて連携する（課題2）</title>
+        <script src="script.js" defer></script>
+        <style>
+            /* 見た目の調整 */
+            body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+            button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+            #layout { font-size: 24px; color: #333; margin-bottom: 20px; }
+        </style>
+    </head>
+    <body> <!-- ボタンの配置-->
+        <p id="layout">ボタンを押すと、背景の色が変わります</p>
+        <button onclick="change_background_color()">背景色を変える</button>
+    </body>
+</html>
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption={課題2のjs}, label={code:task2_js}]
+console.log("テスト")
+
+function change_background_color() {
+    // 0から255までのランダムな整数を作る
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    // ページ全体の色を変える
+    document.body.style.background = `rgb(${r}, ${g}, ${b})`;
+}
+\end{lstlisting}
+
+コード\ref{code:task2_html} はボタンを押すたびにJavaScriptで定義されている、change\_background\_color関数が呼び出されるようになっている。
+
+コード\ref{code:task2_js} はr, g, bの値を0から255個までそれぞれランダムに取得し、背景の色をランダムに変えている。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task2-1.png}
+  \caption{課題2の実験結果(ボタンを一回目に押した時の結果)}
+  \label{fig:task2-1_output}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task2-2.png}
+  \caption{課題2の実験結果(ボタンを続けて二回目押した時の結果)}
+  \label{fig:task2-2_output}
+\end{figure}
+
+図\ref{fig:task2-1_output} と 図\ref{fig:task2-2_output} は課題1の実験結果である。これはボタンを押すと背景の色が切り替わったことを意味している。
+
+実験結果としては、意図通りにボタンを押すたびに背景の色が変化した。今回はRGB空間で指定したがHSV空間でもできそうだと感じた。特にSVを固定してHをランダム化することで、純粋な色相の変化をさせ変化の分かりやすいようことができると考えた。
+
+\section{cssを使ってスタイルを当てる}
+
+\begin{lstlisting}[language=HTML, caption={課題3のhtml}, label={code:task3_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>自分でスタイルを当ててみよう</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1 class="title">自己紹介</h1>
+        <div class="profile-box">
+            <p>はじめまして！Webデザインを勉強中のフロントエンド太郎です</p>
+        </div>
+    </body>
+</html>
+\end{lstlisting}
+
+\begin{lstlisting}[language=CSS, caption={課題3のCSS}, label={code:task3_css}]
+.title {
+    color: green;
+    font-size: 32px;
+}
+
+.profile-box {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+\end{lstlisting}
+
+コード\ref{code:task3_html} は、cssを使ってh1タグとテキストの背景のレイアウトを施したページとなっている。
+
+コード\ref{code:task3_css} はh1タグの色と大きさ、そして背景の色とパッディングの広さを定義している。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task3.png}
+  \caption{課題3の実験結果}
+  \label{fig:task3_output}
+\end{figure}
+
+図\ref{fig:task3_output} は課題3の実験結果である。
+
+実験結果としてはh1タグの色が変わり、パッディングを広く取ったことによって灰色帯が太くなっている。パッティングを広く取ることで目立ちやすいため、強調させたい時に使えそうだなと考えれる。
+
+\section{余白を調整する}
+
+\begin{lstlisting}[language=HTML, caption={課題4のhtml}, label={code:task4_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>自分でスタイルを当ててみよう</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1 class="title">自己紹介</h1>
+        <div class="profile-box">
+            <p>はじめまして！Webデザインを勉強中のフロントエンド太郎です</p>
+        </div>
+    </body>
+</html>
+\end{lstlisting}
+
+\begin{lstlisting}[language=CSS, caption={課題4のCSS}, label={code:task4_css}]
+.title {
+    color: green;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.profile-box {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-top: 20;
+}
+\end{lstlisting}
+
+コード\ref{code:task4_html} は、課題3と同様のため割愛。。
+
+コード\ref{code:task3_css} は、課題3のcssに加えてマージンを設けた。具体的にはh1タグでは下側にマージンを30pxだけ広く設け、テキストの方は上側にマージンを20pxだけ設けた。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task4.png}
+  \caption{課題4の実験結果}
+  \label{fig:task4_output}
+\end{figure}
+
+図\ref{fig:task4_output} は課題3の実験結果である。
+
+実験結果としては、マージンの相殺ということが起き大きく設定してh1タグの方のマージンがスタイルとして採用された。ここから、あまり上と下のタグ同士に関係はないと考えることができる。そのため可読性を考えるのならマージンで広げる場合は、常に上で広げるかか下で広げるかどうかということを統一した方が良いと言えるであろう。
+
+\section{課題5}
+
+\subsection{セレクタの取得}
+
+\begin{lstlisting}[language=HTML, caption={課題5-1のhtml}, label={code:task5-1_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>セレクタの取得</title>
+    </head>
+    <body>
+        <p class="text">一番目の文章</p>
+        <p class="text target">二番目の文章</p>
+        <script>
+            const el = document.querySelector('p.text.target');
+            console.log(el)
+        </script>
+    </body>
+</html>
+\end{lstlisting}
+
+コード\ref{code:task5-1_html} は、targetが付いたpタグだけ得た情報を入手し、定数elに代入しコンソール出力しているコードである。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task5-1.png}
+  \caption{課題5-1の実験結果}
+  \label{fig:task5-1_output}
+\end{figure}
+
+図\ref{fig:task5-1_output} は課題5-1の実験結果である。
+
+実験結果としては、出力結果としてはちゃんとtargetがついたタグだけ入手していることがわかる。これによって差別化をしたい場合はさらに要素を追加することでできる。
+
+\subsection{関数の書き換え（アロー関数）}
+
+\begin{lstlisting}[language=HTML, caption={課題5-2のhtml}, label={code:task5-2_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>関数の書き換え（アロー関数）</title>
+    </head>
+    <body>
+        <button>ボタン</button>
+        <script>
+            const button = document.querySelector('button');
+
+            button.addEventListener('click', () => {
+                console.log('クリックしました')
+            })
+        </script>
+    </body>
+</html>
+\end{lstlisting}
+
+コード\ref{code:task5-2_html} は、無名関数でなくてアロー関数を使って、ボタンが押された時にコンソール出力をするようにしている。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task5-2.png}
+  \caption{課題5-2の実験結果}
+  \label{fig:task5-2_output}
+\end{figure}
+
+図\ref{fig:task5-2_output} は課題5-2の実験結果である。
+
+実験結果としては、ボタンを押すとコメントがコンソーツ出力された。また、従来の方よりもアロー関数の方が視覚的に分かりやすくなっていると感じる。ただし、使いすぎて入れ子構造になってしまい、逆に分かりづらくなる可能性もあるため、気おつけて使用する必要があるかもしれない。
+
+\subsection{アコーディオンメニューの実装}
+
+\begin{lstlisting}[language=HTML, caption={課題5-3のhtml}, label={code:task5-3_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>アコーディオンメニューの実装</title>
+        <style>
+            .accordion-content {
+                display: none;
+            }
+
+            .accordion-content.active {
+                display: block;
+            }
+
+            .accordion-item {
+                border: 1px solid #ccc;
+                margin: 10px;
+                padding: 10px;
+                width: 300px;
+            }
+            .accordion-title {
+                cursor: pointer;
+                font-weight: bold;
+                color: #2b7a78;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="accordion-item">
+            <dt class="accordion-title">Q. 返品は可能ですか？</dt>
+            <dd class="accordion-content">A. 未開封に限り、7日以内なら可能です。</dd>
+        </div>
+
+        <script>
+            const title = document.querySelector('.accordion-title');
+
+            title.addEventListener('click', () => {
+                title.nextElementSibling.classList.toggle('active')
+            })
+        </script>
+    </body>
+</html>
+\end{lstlisting}
+
+コード\ref{code:task5-3_html} は、cssで定義された.activeをJavaScriptで付け外し可能、すなわち表示させるかどうかをトグルで切り替えできるようにすることで、アコーディオンメニュー実現させている。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task5-3.png}
+  \caption{課題5-3の実験結果}
+  \label{fig:task5-3_output}
+\end{figure}
+
+図\ref{fig:task5-3_output} は課題5-3の実験結果である。
+
+実験結果としては、.activeが取り外し可能なためトグルを使うことで表示と非表示を切り分けれるようになった。これを利用すれば、押したら消えるということやイベントが始めるなど様々なことができると考えられる。
+
+\subsection{タブ切り替えUIの実装}
+
+\begin{lstlisting}[language=HTML, caption={課題5-4のhtml}, label={code:task5-4_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>タブ切り替えUIの実装</title>
+        <style>
+            .tab-group {
+                display: flex;
+                gap: 5px;
+                margin-bottom: 20px;
+            }
+            .tab-btn {
+                padding: 10px 20px;
+                cursor: pointer;
+                background-color: #f0f0f0;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            /* アクティブなタブのスタイル */
+            .tab-btn.is-active {
+                background-color: #007bff;
+                color: #fff;
+                border-color: #007bff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="tab-group">
+            <button class="tab-btn is-active">タブ1</button>
+            <button class="tab-btn">タブ2</button>
+            <button class="tab-btn">タブ3</button>
+        </div>
+
+        <script>
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            tabs.forEach((clickedTab) => {
+                clickedTab.addEventListener('click', () => {
+                    tabs.forEach((tab) => {
+                        tab.classList.remove('is-active')
+                    });
+
+                    clickedTab.classList.add('is-active')
+                });
+            });
+        </script>
+    </body>
+    
+</html>
+\end{lstlisting}
+
+コード\ref{code:task5-4_html} は、アコーディオンメニューの応用である。ボタンを押した後、一旦全てからis-activeを付与させないようにしたのちに、押されたボタンだけに対して改めてis-activeを付与させることにより、タブ切り替えUIを実現されている。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task5-4.png}
+  \caption{課題5-4の実験結果}
+  \label{fig:task5-4_output}
+\end{figure}
+
+図\ref{fig:task5-4_output} は課題5-4の実験結果である。
+
+実験結果としては、最初にis-activeを全てのボタンに対して剥奪し、また改めて付与しているため、ダブりが存在せずに独立している。これを活用すると、機能の切り替えができるようになる。
+
+\section{課題5を活用したウェブページ}
+
+\begin{lstlisting}[language=HTML, caption={課題6のhtml}, label={code:task6_html}]
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>課題4：タブ切り替えとアコーディオン</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <!-- 演出①：タブ切り替えUI -->
+            <section class="card">
+                <h2>演出①：タブ切り替えUI</h2>
+                <div class="tab-group">
+                    <button class="tab-btn is-active" data-target="tab1">お知らせ</button>
+                    <button class="tab-btn" data-target="tab2">サービス</button>
+                    <button class="tab-btn" data-target="tab3">会社概要</button>
+                </div>
+                <div class="tab-content-group">
+                    <div id="tab1" class="tab-content is-show">
+                        【2026/07】本日より、JavaScript×CSS連携講座の募集を開始いたしました。
+                    </div>
+                    <div id="tab2" class="tab-content">
+                        私たちは、初心者のわかりやすいWeb制作教材・カリキュラムを提供しています。
+                    </div>
+                    <div id="tab3" class="tab-content">
+                        東京・渋谷を拠点に、最先端のフロントエンド技術を伝えるスクールを運営しています。
+                    </div>
+                </div>
+            </section>
+
+            <!-- 演出②：アコーディオンメニュー -->
+            <section class="card">
+                <h2>演出②：アコーディオンメニュー</h2>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <span>Q. プログラミング未経験でも受講できますか？</span>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        A. はい、大歓迎です。本講座はHTMLの基本を終えたばかり方を対象に設計されています。
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <span>Q. 講義で使用する教材やコードは貰えますか？</span>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        A. はい、講義で解説したサンプルコードはすべて終了後に配布いたします。
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+
+</html>
+\end{lstlisting}
+
+\begin{lstlisting}[language=CSS, caption={課題6のCSS}, label={code:task6_css}]
+/* 全体のレイアウト */
+body {
+    background-color: #f4f5f7;
+    font-family: sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 40px 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* カードのデザイン */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+}
+
+/* 演出①：タブ切り替えUIのスタイル */
+.tab-group {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 16px;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #666;
+    position: relative;
+    text-align: center;
+}
+
+.tab-btn.is-active {
+    color: #0066ff;
+    font-weight: bold;
+}
+
+.tab-btn.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #0066ff;
+}
+
+.tab-content {
+    display: none;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+}
+
+.tab-content.is-show {
+    display: block;
+}
+
+/* 演出②：アコーディオンメニューのスタイル */
+.accordion-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    background-color: #f9f9f9;
+}
+
+.accordion-title {
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion-title .icon {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.accordion-content {
+    display: none;
+    padding: 14px 16px;
+    font-size: 14px;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* アコーディオンが開いたときの状態（クラスが付与されたとき） */
+.accordion-item.is-open .accordion-content {
+    display: block;
+}
+
+.accordion-item.is-open .icon {
+    /* 開いたときに「+」を「×」にするなどの演出 */
+    content: "×";
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript, caption={課題6のjs}, label={code:task6_js}]
+// ==========================
+// 演出①：タブ切り替えUI
+// ==========================
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        // すべてのタブボタンから is-active を外す
+        tabButtons.forEach((btn) => {
+            btn.classList.remove('is-active');
+        });
+        // クリックされたボタンに is-active を付与
+        button.classList.add('is-active');
+
+        // すべてのコンテンツから is-show を外して非表示にする
+        tabContents.forEach((content) => {
+            content.classList.remove('is-show');
+        });
+
+        // 該当するコンテンツを表示する
+        const targetId = button.getAttribute('data-target');
+        const targetContent = document.getElementById(targetId);
+        if (targetContent) {
+            targetContent.classList.add('is-show');
+        }
+    });
+});
+
+// ==========================
+// 演出②：アコーディオンメニュー
+// ==========================
+const accordionTitles = document.querySelectorAll('.accordion-title');
+
+accordionTitles.forEach((title) => {
+    title.addEventListener('click', () => {
+        // 親要素（.accordion-item）のクラスを切り替える
+        const item = title.closest('.accordion-item');
+        item.classList.toggle('is-open');
+
+        // アイコンの文字を「+」と「×」で切り替える
+        const icon = title.querySelector('.icon');
+        if (item.classList.contains('is-open')) {
+            icon.textContent = '×';
+        } else {
+            icon.textContent = '+';
+        }
+    });
+});
+\end{lstlisting}
+
+コード\ref{code:task6_html} は、Webページの全体的な構成を記述している。1段目のsectionは課題5でやったタブ切り替えUIとなっており、2段目のsectionも課題5でやったアコーディオンメニューとなっている。
+
+コード\ref{code:task6_css} は、Webページの細かなレイアウトを記述している。ここでは全体的な配置でなく、細かいレイアウトの仕様が定義されている。
+
+コード\ref{code:task6_js} は主に、課題5でやったタブ切り替えUIとアコーディオンメニューが実装されている。一つ新しい他所としては、is-openが付与されいる場合にアイコンの文字を変える用になっている。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{outputs/result_task6.png}
+  \caption{課題6の実験結果}
+  \label{fig:task6_output}
+\end{figure}
+
+図\ref{fig:task6_output} は課題6の実験結果である。
+
+実験結果はちゃんと課題6に満たすような要件が成し遂げている。特に今回は擬似要素というcssの要素を使うことにより、それぞれのタブごとに青い下線を引けるようになった。これを使うことで、選択されるとその対象を強調できたりすることができることが言えそうである。
+
+\section*{ソースコード}
+
+\end{document}

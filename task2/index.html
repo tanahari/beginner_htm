@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> 二つのファイルに分けて連携する（課題2）</title>
+        <script src="script.js" defer></script>
+        <style>
+            /* 見た目の調整 */
+            body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+            button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+            #layout { font-size: 24px; color: #333; margin-bottom: 20px; }
+        </style>
+    </head>
+    <body> <!-- ボタンの配置-->
+        <p id="layout">ボタンを押すと、背景の色が変わります</p>
+        <button onclick="change_background_color()">背景色を変える</button>
+    </body>
+</html>

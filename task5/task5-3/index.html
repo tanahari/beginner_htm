@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>アコーディオンメニューの実装</title>
+        <style>
+            .accordion-content {
+                display: none;
+            }
+
+            .accordion-content.active {
+                display: block;
+            }
+
+            .accordion-item {
+                border: 1px solid #ccc;
+                margin: 10px;
+                padding: 10px;
+                width: 300px;
+            }
+            .accordion-title {
+                cursor: pointer;
+                font-weight: bold;
+                color: #2b7a78;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="accordion-item">
+            <dt class="accordion-title">Q. 返品は可能ですか？</dt>
+            <dd class="accordion-content">A. 未開封に限り、7日以内なら可能です。</dd>
+        </div>
+
+        <script>
+            const title = document.querySelector('.accordion-title');
+
+            title.addEventListener('click', () => {
+                title.nextElementSibling.classList.toggle('active')
+            })
+        </script>
+    </body>
+</html>

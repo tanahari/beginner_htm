@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>課題4：タブ切り替えとアコーディオン</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <!-- 演出①：タブ切り替えUI -->
+            <section class="card">
+                <h2>演出①：タブ切り替えUI</h2>
+                <div class="tab-group">
+                    <button class="tab-btn is-active" data-target="tab1">お知らせ</button>
+                    <button class="tab-btn" data-target="tab2">サービス</button>
+                    <button class="tab-btn" data-target="tab3">会社概要</button>
+                </div>
+                <div class="tab-content-group">
+                    <div id="tab1" class="tab-content is-show">
+                        【2026/07】本日より、JavaScript×CSS連携講座の募集を開始いたしました。
+                    </div>
+                    <div id="tab2" class="tab-content">
+                        私たちは、初心者のわかりやすいWeb制作教材・カリキュラムを提供しています。
+                    </div>
+                    <div id="tab3" class="tab-content">
+                        東京・渋谷を拠点に、最先端のフロントエンド技術を伝えるスクールを運営しています。
+                    </div>
+                </div>
+            </section>
+
+            <!-- 演出②：アコーディオンメニュー -->
+            <section class="card">
+                <h2>演出②：アコーディオンメニュー</h2>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <span>Q. プログラミング未経験でも受講できますか？</span>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        A. はい、大歓迎です。本講座はHTMLの基本を終えたばかり方を対象に設計されています。
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-title">
+                        <span>Q. 講義で使用する教材やコードは貰えますか？</span>
+                        <span class="icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        A. はい、講義で解説したサンプルコードはすべて終了後に配布いたします。
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+
+</html>

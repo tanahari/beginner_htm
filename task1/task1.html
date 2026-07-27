@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>私の自己紹介ページ(課題1)</title>
+        <style>
+            /* 簡易的なCSS（見た目をちょっと整える設定） */
+            body {
+                font-family: sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f9f9f9;
+            }
+
+            header,
+            main,
+            footer {
+                background-color: #fff;
+                padding: 25px;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            }
+
+            header {
+                text-align: center;
+                background: linear-gradient(135deg, #2c3e50, #3498db);
+                color: white;
+            }
+
+            h1 {
+                margin-top: 0;
+            }
+
+            h2 {
+                border-bottom: 2px solid #3498db;
+                padding-bottom: 5px;
+                margin-top: 30px;
+            }
+
+            ul {
+                background-color: #f1f8ff;
+                padding: 20px 20px 20px 40px;
+                border-radius: 5px;
+            }
+
+            .icon-img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+                margin: 10px auto;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            footer {
+                text-align: center;
+                font-size: 0.9rem;
+                color: #777;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- 1. ヘッダー領域 -->
+        <header>
+            <h1>Welcome to My Profile!</h1>
+            <p>HTMLの練習用に作った、私の自己紹介ページです。</p>
+        </header>
+
+        <!-- 2. 自己紹介メインエリア -->
+        <main>
+            <h2>プロフィール</h2>
+            <p>はじめまして！現在、Web開発の基礎を勉強中の神田聖です。</p>
+            <p>2年次の時にこの講義を受講することを忘れていたので、3年次の今受講することになりました。</p>
+
+            <h2>私の好きなこと</h2>
+            <ul>
+                <li>物理学（大学院では物理系の研究室を志望しています）</li>
+                <li>音楽を聴くこと</li>
+                <li>勉強すること</li>
+            </ul>
+
+            <h2>自分がよく使っているアイコン</h2>
+            <img src="my-icon.png" alt="自分がよく使うアイコン" width="400" class="icon-img">
+            <p>ちなみにこの画像は数式であり、ナビエストークス方程式の移流項という名前の式である。</p>
+
+            <h2>自分が物理を好きになったきっかけの人</h2>
+            <p>
+                通称：ヨビノリ（<a href="https://www.youtube.com/@yobinori" target="_blank">予備校のノリで学ぶ大学の数学・物理のチャンネル</a>）
+            </p>
+        </main>
+
+        <!-- 3. フッター領域 -->
+        <footer>
+            <p>&copy; 2026 神田聖. All Rights Reserved.</p>
+        </footer>
+    </body>
+</html>

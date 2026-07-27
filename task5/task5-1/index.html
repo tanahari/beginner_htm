@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>セレクタの取得</title>
+    </head>
+    <body>
+        <p class="text">一番目の文章</p>
+        <p class="text target">二番目の文章</p>
+        <script>
+            const el = document.querySelector('p.text.target');
+            console.log(el)
+        </script>
+    </body>
+</html>
